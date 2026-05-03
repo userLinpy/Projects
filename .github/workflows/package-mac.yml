@@ -8,12 +8,16 @@ jobs:
   build:
     runs-on: macos-latest
 
+    defaults:
+      run:
+        working-directory: Projet_ToDoList_Ghibli/app
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4 # Version mise à jour
+        uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4 # Version mise à jour
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -31,10 +35,10 @@ jobs:
             --main-class com.ghibli.todolist.App \
             --module-path target/libs:target/app-1.0-SNAPSHOT.jar \
             --input target/ \
-            --icon src/main/resources/background.icns || echo "Icon not found, continuing without it"
+            --icon src/main/resources/background.icns || echo "Icon fail, continuing"
 
       - name: Upload DMG
-        uses: actions/upload-artifact@v4 # Version mise à jour
+        uses: actions/upload-artifact@v4
         with:
           name: GhibliTodo-Mac-DMG
-          path: target/dist/*.dmg
+          path: Projet_ToDoList_Ghibli/app/target/dist/*.dmg 
