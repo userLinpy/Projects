@@ -1,0 +1,40 @@
+name: Build MacOS DMG
+
+on:
+  push:
+    branches: [ main ] # Se déclenche quand tu pousses sur la branche main
+
+jobs:
+  build:
+    runs-on: macos-latest # GitHub utilise un serveur Mac
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build with Maven
+        run: mvn clean package
+
+      - name: Create DMG with jpackage
+        run: |
+          jpackage --type dmg \
+            --dest target/dist \
+            --name "GhibliTodo" \
+            --main-jar app-1.0-SNAPSHOT.jar \
+            --main-class com.ghibli.todolist.App \
+            --module-path target/libs:target/app-1.0-SNAPSHOT.jar \
+            --input target/ \
+            --icon src/main/resources/background.icns || echo "Vérifiez le chemin de l'icône"
+
+      - name: Upload DMG
+        uses: actions/upload-artifact@v3
+        with:
+          name: GhibliTodo-Mac-DMG
+          path: target/dist/*.dmg
