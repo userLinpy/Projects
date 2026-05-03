@@ -1,0 +1,98 @@
+/* On applique l'image uniquement à la scène principale */
+.root {
+    -fx-background-image: url("background.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-padding: 20;
+}
+
+/* On force le fond des menus déroulants (ComboBox) à être neutre */
+.combo-box-popup > .list-view, 
+.context-menu {
+    -fx-background-image: none; /* Supprime l'image en miniature */
+    -fx-background-color: white; /* Fond propre pour lire les options */
+    -fx-background-radius: 5;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+}
+
+/* On s'assure que les cellules à l'intérieur du menu déroulant sont lisibles */
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:hover {
+    -fx-background-color: #e3f2fd;
+}
+/* On force tous les panneaux intermédiaires à être transparents */
+/* Sinon, le blanc ou gris par défaut des VBox cachera l'image */
+.vbox, .hbox {
+    -fx-background-color: transparent;
+}
+
+/* Le conteneur de la liste (ListView) */
+.list-view {
+    /* Fond blanc très léger et flou */
+    -fx-background-color: rgba(255, 255, 255, 0.3); 
+    -fx-background-radius: 15;
+    -fx-border-color: rgba(255, 255, 255, 0.5);
+    -fx-border-radius: 15;
+    -fx-padding: 5;
+}
+
+/* Les cellules (chaque ligne de tâche) */
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #2c3e50;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 14px;
+    -fx-padding: 8;
+}
+
+/* Effet lorsque la souris survol les cellules */
+.list-cell:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-radius: 10;
+}
+
+/* Quand une tâche est sélectionnée */
+.list-cell:filled:selected {
+    -fx-background-color: rgba(74, 144, 226, 0.6); /* Bleu Ghibli semi-transparent */
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+}
+
+/* Style pour rendre les Labels plus lisibles sur l'image */
+.label {
+    -fx-text-fill: #1a1a1a;
+    -fx-font-weight: bold;
+    /* Petit effet d'ombre portée pour détacher le texte du fond */
+    -fx-effect: dropshadow(gaussian, rgba(255,255,255,0.5), 5, 0, 0, 1);
+}
+
+/* Cible les chiffres (0, 25, 50, 75, 100) de l'avancement */
+.slider .axis {
+    -fx-tick-label-fill: white; /* Couleur des chiffres */
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+}
+
+/* Cible les petites barres de graduation de l'avancement */
+.slider .axis .axis-tick-mark {
+    -fx-stroke: white; /* Couleur des petits traits */
+    -fx-stroke-width: 2;
+}
+
+/* Rendre la barre elle-même plus visible */
+.slider .track {
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+    -fx-background-insets: 0;
+    -fx-background-radius: 5;
+}
+
+/* Rendre le bouton de couleur bleu */
+.slider .thumb {
+    -fx-background-color: #4A90E2;
+    -fx-background-radius: 10;
+}
